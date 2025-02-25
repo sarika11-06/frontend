@@ -133,7 +133,7 @@ export default function About() {
         </section>
         
         {/* Join Us / Call to Action */}
-        <section className="bg-gradient-to-r from-orange-600 to-orange-700 text-white p-8 rounded-lg shadow-lg text-center">
+        <section className="bg-[#f04b00] text-white p-8 rounded-lg shadow-lg text-center">
           <h2 className="text-3xl font-bold mb-4">Experience the Art of Bharatanatyam</h2>
           <p className="text-xl mb-6 max-w-2xl mx-auto">
             Whether you're interested in learning this ancient art form or witnessing its beauty through performances, we welcome you to join our community.
@@ -149,27 +149,7 @@ export default function About() {
         </section>
       </main>
       
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h3 className="text-xl font-bold text-orange-500">Bharatanatyam Academy</h3>
-              <p className="text-gray-400">Preserving tradition, inspiring innovation</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition">About</a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition">Classes</a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition">Events</a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition">Gallery</a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition">Contact</a>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Bharatanatyam Academy. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 }
