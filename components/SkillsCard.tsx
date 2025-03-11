@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { ChevronRight, Star, Play } from "lucide-react";
-type Level = "beginner" | "intermediate" | "advanced";
+import { useNavigate } from "react-router";
+type Level = "basics" | "adavus" | "mudras&bhedas";
 
 interface Levels {
   [key: string]: {
@@ -10,27 +11,69 @@ interface Levels {
 }
 
 const SkillsCard = () => {
-  const [activeLevel, setActiveLevel] = useState<Level>("beginner");
+  const navigate = useNavigate();
+  const [activeLevel, setActiveLevel] = useState<Level>("basics");
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const levels: Levels = {
-    beginner: {
+    basics: {
       title: "Basic Foundations",
       topics: [
-        "Aramandi Position",
-        "Basic Hand Gestures",
-        "Foot Movements",
-        "Adavus Introduction",
+        "The Basics of Bharatnatyam (3N)",
+        "Namaskar",
+        "Adavus",
+        "More about Adavus",
       ],
     },
-    intermediate: {
-      title: "Intermediate Concepts",
-      topics: ["Complex Mudras", "Jathis", "Nritta Elements", "Basic Abhinaya"],
+    adavus: {
+      title: "Adavus Concepts",
+      topics: [
+        "Tatta Adavu",
+        "Natta Adavu",
+        "Visharu Adavu",
+        "TattiMetti Adavu",
+      ],
     },
-    advanced: {
-      title: "Advanced Compositions",
-      topics: ["Varnam", "Tillana", "Advanced Abhinaya", "Full Performances"],
+    mudras_bhedas: {
+      title: "Mudras & Bhedas",
+      topics: [
+        "Asamyukta Hastas",
+        "Samayukta Hastas",
+        "Dashavatara Hastas",
+        "Devta Hastas",
+      ],
     },
   };
+  const toggleFavorite = (topic: string) => {
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(topic)) {
+        newFavorites.delete(topic);
+      } else {
+        newFavorites.add(topic);
+      }
+      return newFavorites;
+    });
+  };
+
+  const featuredLessons = [
+    {
+      id: "bi5oVX0Sp9s",
+      title: "Basic Mudra Series 1",
+      description: "Learn the fundamental hand gestures of Bharatnatyam.",
+    },
+    {
+      id: "VIDEO_ID_2",
+      title: "Footwork Techniques",
+      description:
+        "Master the rhythmic foot movements essential for performances.",
+    },
+    {
+      id: "VIDEO_ID_3",
+      title: "Expressions in Bharatnatyam",
+      description: "Understand how facial expressions enhance storytelling.",
+    },
+  ];
 
   return (
     <div>
@@ -54,7 +97,7 @@ const SkillsCard = () => {
           </div>
 
           {/* Current Level Content */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white rounded-xl shadow-lg p-6 relative">
             <h2 className="text-2xl font-bold text-orange-800 mb-6">
               {levels[activeLevel].title}
             </h2>
@@ -69,18 +112,40 @@ const SkillsCard = () => {
                     <h3 className="text-lg font-semibold text-orange-900">
                       {topic}
                     </h3>
-                    <Star className="text-orange-400" size={20} />
+                    <Star
+                      className={`cursor-pointer ${
+                        favorites.has(topic)
+                          ? "text-orange-600"
+                          : "text-orange-400"
+                      }`}
+                      size={20}
+                      onClick={() => toggleFavorite(topic)}
+                    />
                   </div>
                   <p className="text-orange-700 mb-4">
                     Learn the fundamental aspects of {topic.toLowerCase()} in
                     Bharatnatyam.
                   </p>
-                  <button className="flex items-center text-orange-600 hover:text-orange-800">
+                  <button
+                    onClick={() => navigate(`/${activeLevel}`)}
+                    className="flex items-center text-orange-600 hover:text-orange-800"
+                  >
                     <span>Start Learning</span>
                     <ChevronRight size={16} className="ml-2" />
                   </button>
                 </div>
               ))}
+            </div>
+
+            {/* View More Button - Unique for Each Section */}
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={() => navigate(`/${activeLevel}`)}
+                className="flex items-center text-orange-600 hover:text-orange-800 font-medium"
+              >
+                <span>View More</span>
+                <ChevronRight size={20} className="ml-2" />
+              </button>
             </div>
           </div>
 
@@ -89,22 +154,32 @@ const SkillsCard = () => {
             <h2 className="text-2xl font-bold text-orange-800 mb-6">
               Featured Lessons
             </h2>
+
             <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((item) => (
+              {featuredLessons.map((lesson, index) => (
                 <div
-                  key={item}
+                  key={index}
                   className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
+                  {/* YouTube Video Embed */}
                   <div className="bg-orange-200 h-48 flex items-center justify-center">
-                    <Play size={48} className="text-orange-600" />
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${lesson.id}`}
+                      title={lesson.title}
+                      frameBorder="0"
+                      allowFullScreen
+                      className="rounded-t-lg"
+                    ></iframe>
                   </div>
+
+                  {/* Video Details */}
                   <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">
-                      Basic Mudra Series {item}
+                    <h3 className="font-semibold text-lg mb-2 text-orange-900">
+                      {lesson.title}
                     </h3>
-                    <p className="text-gray-600">
-                      Master the essential hand gestures of Bharatnatyam
-                    </p>
+                    <p className="text-gray-600">{lesson.description}</p>
                   </div>
                 </div>
               ))}
@@ -112,7 +187,6 @@ const SkillsCard = () => {
           </div>
         </main>
       </div>
-      
     </div>
   );
 };

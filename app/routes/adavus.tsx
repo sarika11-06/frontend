@@ -1,5 +1,5 @@
-import SignUp from "components/SignUp";
-import type { Route } from "./+types/signup";
+import Adavus from "components/Adavus";
+import type { Route } from "./+types/adavus";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +8,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function signup() {
-  return <SignUp />;
+export default function adavus() {
+  return <Adavus />;
 }

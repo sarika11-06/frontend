@@ -10,4 +10,20 @@ export default [
     path: "signup",
     file: "routes/signup.tsx",
   },
+  {
+    path: "gesture",
+    file: "routes/gesture.tsx",
+  },
+  {
+    path: "basics",
+    file: "routes/basic.tsx",
+  },
+  {
+    path: "adavus",
+    file: "routes/adavus.tsx",
+  },
+  {
+    path: "mudras_bhedas",
+    file: "routes/mudras_bhedas.tsx",
+  },
 ] satisfies RouteConfig;
