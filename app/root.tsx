@@ -7,10 +7,12 @@ import {
   Scripts,
   ScrollRestoration,
   useNavigate,
-} from "react-router";
+} from "react-router-dom";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+// Fix the import path - use proper case and relative path
+import VoiceControlButton from "../components/VoiceControlButton";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,6 +27,16 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Rest of your code remains the same...
+
+export function AppRoot() {
+  return (
+    <Layout>
+      <App />
+    </Layout>
+  );
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -36,6 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <VoiceControlButton />
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -43,12 +56,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
+export function App() {
   const navigate = useNavigate();
 
   return (
     <>
-      <header className=" text-black py-4 shadow-lg">
+      <header className="text-black py-4 shadow-lg">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
@@ -76,18 +89,18 @@ export default function App() {
                 >
                   About
                 </Link>
-                {/* <Link
+                <Link
                   to="/contact"
                   className="hover:text-orange-200 transition-colors cursor-pointer"
                 >
                   Contact
-                </Link> */}
+                </Link>
               </nav>
               <button
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/gesture")}
                 className="hover:bg-white text-orange-600 px-4 py-2 rounded-lg bg-orange-100 transition-colors font-medium cursor-pointer"
               >
-                Sign Up
+                Try
               </button>
             </div>
           </div>
@@ -99,40 +112,27 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-xl font-bold text-orange-500">
-                Bharatanatyam Academy
-              </h3>
+              <h3 className="text-xl font-bold text-orange-500">Nritalya</h3>
               <p className="text-gray-400">
                 Preserving tradition, inspiring innovation
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-4 md:gap-6">
               <a
-                href="#"
+                href="/about"
                 className="text-gray-400 hover:text-orange-500 transition"
               >
                 About
               </a>
+
               <a
-                href="#"
-                className="text-gray-400 hover:text-orange-500 transition"
-              >
-                Classes
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-orange-500 transition"
-              >
-                Events
-              </a>
-              <a
-                href="#"
+                href="/gallery"
                 className="text-gray-400 hover:text-orange-500 transition"
               >
                 Gallery
               </a>
               <a
-                href="#"
+                href="/contact"
                 className="text-gray-400 hover:text-orange-500 transition"
               >
                 Contact
@@ -140,8 +140,7 @@ export default function App() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-6 pt-6 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Bharatanatyam Academy. All rights
-            reserved.
+            © {new Date().getFullYear()} Nritalya. All rights reserved.
           </div>
         </div>
       </footer>
@@ -177,3 +176,5 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+
+export default AppRoot;

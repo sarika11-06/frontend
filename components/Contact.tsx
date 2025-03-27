@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Mail, User, Building, Phone, MessageCircle } from "lucide-react";
-// import { Button } from "@/components/ui/button";
+import emailjs from "@emailjs/browser";
+import { Mail, User, MessageCircle } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,24 +9,35 @@ const Contact = () => {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    // Replace with your EmailJS serviceID, templateID, and publicKey
+    emailjs
+      .send(
+        "service_1tndpap",
+        "template_25q3lam",
+        formData,
+        "FQ3US5PB-e4fs0X6t"
+      )
+      .then(() => {
+        alert("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch((error) => {
+        console.error("Failed to send message:", error);
+        alert("Failed to send message. Please try again later.");
+      });
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[91vh] px-4">
-      {/* <h1 className="text-3xl font-bold mt-2 text-[#f3672b]">
-        We've been waiting for you.
-      </h1>
-      <p className="text-orange-300 mt-2">
-        We want to hear from you. Let us know how we can help.
-      </p> */}
-
       <div className="bg-white p-10 rounded-2xl shadow-lg mt-6 w-full max-w-md">
         <h3 className="text-xl font-semibold text-center text-[#f54a00]">
           Send us a Message
@@ -60,7 +71,10 @@ const Contact = () => {
           </div>
 
           <div className="relative">
-            <MessageCircle className="absolute left-3 top-3 text-gray-400" size={20} />
+            <MessageCircle
+              className="absolute left-3 top-3 text-gray-400"
+              size={20}
+            />
             <textarea
               name="message"
               placeholder="Enter your message"

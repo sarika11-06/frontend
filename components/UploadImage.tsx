@@ -5,6 +5,7 @@ function GestureRecognition() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [prediction, setPrediction] = useState("");
   const [isCameraOn, setIsCameraOn] = useState(false);
+  const [mode, setMode] = useState("hand"); // "hand" or "body"
 
   useEffect(() => {
     return () => closeCamera(); // Cleanup on unmount
@@ -25,7 +26,7 @@ function GestureRecognition() {
   const closeCamera = () => {
     if (videoRef.current && videoRef.current.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track) => track.stop());
       videoRef.current.srcObject = null;
     }
     setIsCameraOn(false);
@@ -45,13 +46,23 @@ function GestureRecognition() {
         const formData = new FormData();
         formData.append("file", blob, "frame.jpg");
 
-        const response = await fetch("http://localhost:8000/predict/", {
-          method: "POST",
-          body: formData,
-        });
+        const endpoint =
+          mode === "hand"
+            ? "http://localhost:8000/predict/hand/"
+            : "http://localhost:8000/predict/body/";
 
-        const data = await response.json();
-        if (data.gesture) setPrediction(data.gesture);
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await response.json();
+          if (data.hand_gesture) setPrediction(data.hand_gesture);
+          if (data.body_pose) setPrediction(data.body_pose);
+        } catch (error) {
+          console.error("Error fetching prediction:", error);
+        }
       }
     }, "image/jpeg");
   };
@@ -62,12 +73,12 @@ function GestureRecognition() {
       interval = setInterval(captureAndSendFrame, 1000);
     }
     return () => clearInterval(interval);
-  }, [isCameraOn]);
+  }, [isCameraOn, mode]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div className="flex flex-col items-center justify-center min-h-[74.2vh] bg-gray-100 p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">
-        Real-Time Hand Gesture Recognition
+        Real-Time Gesture & Body Pose Recognition
       </h2>
 
       <div className="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
@@ -82,6 +93,23 @@ function GestureRecognition() {
         <h3 className="text-lg font-semibold text-gray-700 mt-4">
           Prediction: <span className="text-[#f54a00]">{prediction || "N/A"}</span>
         </h3>
+
+        <div className="flex gap-4 mt-4">
+          <button
+            onClick={() => setMode("hand")}
+            className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 
+                       ${mode === "hand" ? "bg-[#f54a00] text-white" : "bg-gray-300 text-gray-800"}`}
+          >
+            Hand Gesture
+          </button>
+          <button
+            onClick={() => setMode("body")}
+            className={`px-4 py-2 font-semibold rounded-lg transition-all duration-300 
+                       ${mode === "body" ? "bg-[#f54a00] text-white" : "bg-gray-300 text-gray-800"}`}
+          >
+            Body Pose
+          </button>
+        </div>
 
         <button
           onClick={isCameraOn ? closeCamera : startCamera}

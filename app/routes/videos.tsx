@@ -1,5 +1,5 @@
-import SignUp from "components/SignUp";
-import type { Route } from "./+types/signup";
+import Videos from "components/Videos";
+import type { Route } from "./+types/videos";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +8,6 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function signup() {
-  return <SignUp />;
+export default function videos() {
+  return <Videos />;
 }

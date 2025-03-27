@@ -7,8 +7,8 @@ export default [
     file: "routes/about.tsx",
   },
   {
-    path: "signup",
-    file: "routes/signup.tsx",
+    path: "contact",
+    file: "routes/contact.tsx",
   },
   {
     path: "gesture",
@@ -25,5 +25,13 @@ export default [
   {
     path: "mudras_bhedas",
     file: "routes/mudras_bhedas.tsx",
+  },
+  {
+    path: "videos",
+    file: "routes/videos.tsx",
+  },
+  {
+    path: "gallery",
+    file: "routes/gallery.tsx",
   },
 ] satisfies RouteConfig;

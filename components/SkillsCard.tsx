@@ -77,6 +77,26 @@ const SkillsCard = () => {
 
   return (
     <div>
+      {/* Feature Section */}
+      <section className="bg-[#f88c3f] text-white p-10 max-w-7xl mx-auto rounded-lg shadow-lg text-center mt-16 mb-6">
+        <h2 className="text-3xl font-bold mb-4">Try our New Feature</h2>
+        <p className="text-xl mb-6 max-w-3xl mx-auto">
+          Ready to practice your <span className="font-semibold">Mudras</span>{" "}
+          and perfect your
+          <span className="font-semibold"> postures</span>? Try our new
+          <span className="font-semibold"> AI Camera Mode</span> — perform live
+          and check if your hand gestures and body alignment are correct.
+        </p>
+        <div className="flex justify-center">
+          <button
+            onClick={() => navigate("/gesture")}
+            className="bg-white text-orange-700 hover:bg-orange-100 px-6 py-3 rounded-lg font-bold transition duration-300 flex items-center"
+          >
+            <span className="mr-2">👥</span> Try Mudras with AI Camera
+          </button>
+        </div>
+      </section>
+
       <div className="flex justify-center space-x-4 p-10 max-w-7xl mx-auto">
         <main className="max-w-6xl mx-auto px-4 py-8">
           {/* Level Selection */}
@@ -150,6 +170,8 @@ const SkillsCard = () => {
           </div>
 
           {/* Featured Section */}
+
+          {/* Featured Section */}
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-orange-800 mb-6">
               Featured Lessons
@@ -183,6 +205,17 @@ const SkillsCard = () => {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* View All Button */}
+            <div className="flex justify-end mt-6">
+              <button
+                onClick={() => navigate("/videos")}
+                className="flex items-center text-orange-600 hover:text-orange-800 font-medium"
+              >
+                <span>View All</span>
+                <ChevronRight size={20} className="ml-2" />
+              </button>
             </div>
           </div>
         </main>
