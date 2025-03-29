@@ -1,7 +1,9 @@
 import React from "react";
 import danceImg from "images/Untitled design.png";
+import { useNavigate } from "react-router";
 
 export default function About() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
       {/* Header */}
@@ -204,11 +206,10 @@ export default function About() {
             our community.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-orange-700 hover:bg-orange-100 px-6 py-3 rounded-lg font-bold transition duration-300">
-              Join Classes
-            </button>
-            <button className="bg-transparent border-2 border-white hover:bg-white hover:text-orange-700 px-6 py-3 rounded-lg font-bold transition duration-300">
-              Upcoming Performances
+            <button className="bg-transparent border-2 border-white hover:bg-white hover:text-orange-700 px-6 py-3 rounded-lg font-bold transition duration-300 cursor-pointer"
+              onClick={() => navigate("/videos")}
+            >
+              Videos Performances
             </button>
           </div>
         </section>

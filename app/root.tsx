@@ -79,19 +79,19 @@ export function App() {
               <nav className="flex space-x-6 items-center">
                 <Link
                   to="/"
-                  className="hover:text-orange-200 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-orange-100 hover:scale-105 hover:shadow-md"
                 >
                   Home
                 </Link>
                 <Link
                   to="/about"
-                  className="hover:text-orange-200 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-orange-100 hover:scale-105 hover:shadow-md"
                 >
                   About
                 </Link>
                 <Link
                   to="/contact"
-                  className="hover:text-orange-200 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-lg transition-all duration-300 ease-in-out hover:bg-orange-100 hover:scale-105 hover:shadow-md"
                 >
                   Contact
                 </Link>
@@ -100,7 +100,7 @@ export function App() {
                 onClick={() => navigate("/gesture")}
                 className="hover:bg-white text-orange-600 px-4 py-2 rounded-lg bg-orange-100 transition-colors font-medium cursor-pointer"
               >
-                Try
+                Try our new features
               </button>
             </div>
           </div>

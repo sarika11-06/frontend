@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const Videos = () => {
@@ -41,6 +41,16 @@ const Videos = () => {
   return (
     <div className="flex justify-center space-x-4 p-10 max-w-7xl mx-auto">
       <main className="max-w-6xl mx-auto px-4 py-8">
+        {/* Back Button */}
+        <div className="flex justify-start -ml-3.5 mb-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center text-orange-600 hover:text-orange-800 font-medium cursor-pointer"
+          >
+            <ChevronLeft size={20} className="ml-2" />
+            <span>Back</span>
+          </button>
+        </div>
         <h2 className="text-2xl font-bold text-orange-800 mb-6">
           All Dance Videos
         </h2>
@@ -73,17 +83,6 @@ const Videos = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Back Button */}
-        <div className="flex justify-end mt-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center text-orange-600 hover:text-orange-800 font-medium"
-          >
-            <span>Back</span>
-            <ChevronRight size={20} className="ml-2" />
-          </button>
         </div>
       </main>
     </div>

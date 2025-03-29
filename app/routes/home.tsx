@@ -3,7 +3,7 @@ import SkillsCard from "components/SkillsCard";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
+    { title: "Nritalaya" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }

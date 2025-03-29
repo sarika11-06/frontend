@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const adavusContent = [
   {
@@ -353,13 +354,20 @@ const adavusContent = [
 
 const Adavus = () => {
   const navigate = useNavigate();
-
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [showReadMore, setShowReadMore] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (contentRef.current) {
+      setShowReadMore(contentRef.current.scrollHeight > 350);
+    }
+  }, []);
   return (
     <div className="max-w-6xl mx-auto p-6">
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center text-orange-600 hover:text-orange-800 mb-4"
+        className="flex items-center cursor-pointer text-orange-600 hover:text-orange-800 mb-4"
       >
         <ChevronLeft size={20} className="mr-2" /> Back
       </button>
@@ -368,7 +376,7 @@ const Adavus = () => {
         Adavus in Bharatnatyam
       </h1>
 
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-2 gap-6">
         {adavusContent.map((adavu, index) => (
           <div
             key={index}

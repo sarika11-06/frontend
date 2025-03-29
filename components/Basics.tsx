@@ -6,11 +6,11 @@ const basicMudras = [
     name: "The Basics of Bharatnatyam (3N)",
     description: (
       <>
-        <p>
+        <p className="text-start">
           Bharatanatyam is generally referred to have three distinct streams or
           aspects:
         </p>
-        <ul className="list-disc list-inside mt-2">
+        <ul className="text-start list-disc list-inside mt-2">
           <li>
             <strong>Nritta:</strong> Pure dance sequences that are
             non-interpretative, primarily meant to add beauty to the dance form.
@@ -34,7 +34,7 @@ const basicMudras = [
   {
     name: "Namaskar - Traditional way to start",
     description: (
-      <>
+      <div className="text-start">
         Before starting out with our sessions, we always do the NAMASKAR. Here
         the dancer bows down in respect to the following:
         <ol className="list-disc list-inside mt-2">
@@ -57,13 +57,13 @@ const basicMudras = [
           </a>
           .
         </p>
-      </>
+      </div>
     ),
   },
   {
     name: "All about Adavus",
     description: (
-      <>
+      <div className="text-start">
         The word “Adavu” means basic step. Adavus forms the ABC’s of pure
         dancing(Nritta) in bharatanatyam. Just like a combination of alphabets
         give words and thereafter sentences, adavus are combined to form a dance
@@ -97,13 +97,13 @@ const basicMudras = [
           “Samapadam” is synonymous with “Sama” mentioned in my “Day – 1”
           posting.
         </p>
-      </>
+      </div>
     ),
   },
   {
     name: "Bharatnatyam Mudras",
     description: (
-      <>
+      <div className="text-start">
         <p>
           hand gestures are a basic mode of communication. Gesture is a symbolic
           action by which a thought, a feeling or intention is expressed.
@@ -137,7 +137,7 @@ const basicMudras = [
           at the resources page and follow the links for hand gesture details on
           other sites.
         </p>
-      </>
+      </div>
     ),
   },
 ];
@@ -150,7 +150,7 @@ const Basics = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="flex items-center text-orange-600 hover:text-orange-800 mb-4"
+        className="flex items-center cursor-pointer text-orange-600 hover:text-orange-800 mb-4"
       >
         <ChevronLeft size={20} className="mr-2" /> Back
       </button>
