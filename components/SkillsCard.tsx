@@ -1,6 +1,7 @@
 import { use, useState } from "react";
 import { ChevronRight, Star, Play } from "lucide-react";
 import { useNavigate } from "react-router";
+import SliderAnimation from "./SliderAnimation";
 type Level = "basics" | "adavus" | "mudras&bhedas";
 
 interface Levels {
@@ -63,7 +64,7 @@ const SkillsCard = () => {
       description: "Learn the fundamental hand gestures of Bharatnatyam.",
     },
     {
-      id: "VIDEO_ID_2",
+      id: "UmRjxek5qYQ",
       title: "Footwork Techniques",
       description:
         "Master the rhythmic foot movements essential for performances.",
@@ -78,6 +79,7 @@ const SkillsCard = () => {
   return (
     <div>
       {/* Feature Section */}
+      <SliderAnimation />
       <section className="relative p-10 max-w-6xl mx-auto bg-[#fa7721] rounded-lg shadow-lg text-center mt-16 mb-6 text-white">
         <h2 className="text-3xl font-bold mb-4">Try our New Feature</h2>
 
@@ -151,29 +153,31 @@ const SkillsCard = () => {
                     Learn the fundamental aspects of {topic.toLowerCase()} in
                     Bharatnatyam.
                   </p>
-                  {/* <button
-                    onClick={() => navigate(`/${activeLevel}`)}
+                  {/* Start Learning Button */}
+                  <button
+                    onClick={() => navigate(`/description/${topic}`)} // Updated route to navigate to the description
                     className="flex items-center cursor-pointer text-orange-600 hover:text-orange-800"
                   >
                     <span>Start Learning</span>
                     <ChevronRight size={16} className="ml-2" />
-                  </button> */}
+                  </button>
                 </div>
               ))}
             </div>
 
             {/* View More Button - Unique for Each Section */}
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={() => navigate(`/${activeLevel}`)}
-                className="flex items-center cursor-pointer text-orange-600 hover:text-orange-800 font-medium"
-              >
-                <span>Read More</span>
-                <ChevronRight size={20} className="ml-2" />
-              </button>
-            </div>
+            {activeLevel !== "basics" && (
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={() => navigate(`/${activeLevel}`)} // Navigate to the level description route
+                  className="flex items-center cursor-pointer text-orange-600 hover:text-orange-800 font-medium"
+                >
+                  <span>Read More</span>
+                  <ChevronRight size={20} className="ml-2" />
+                </button>
+              </div>
+            )}
           </div>
-
 
           {/* Featured Section */}
           <div className="mt-12">

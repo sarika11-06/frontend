@@ -34,4 +34,8 @@ export default [
     path: "gallery",
     file: "routes/gallery.tsx",
   },
+  {
+    path: "description/:postId",
+    file: "routes/description.tsx",
+  },
 ] satisfies RouteConfig;
