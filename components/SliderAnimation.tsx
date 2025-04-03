@@ -51,12 +51,12 @@ const SliderAnimation: React.FC = () => {
   // Auto-slide functionality using useEffect
   useEffect(() => {
     const autoSlideInterval = setInterval(() => {
-      nextSlide();
-    }, 3000); // Change slide every 3 seconds
-
-    // Cleanup the interval when the component unmounts
-    return () => clearInterval(autoSlideInterval);
-  }, []);
+      setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+    }, 3000);
+  
+    return () => clearInterval(autoSlideInterval); // Cleanup properly before next re-render
+  }, []); // ✅ Removed `currentIndex` from dependencies to prevent infinite re-creation
+  
 
   return (
     <div className="max-w-6xl mx-auto mt-10 relative overflow-hidden">
@@ -84,7 +84,7 @@ const SliderAnimation: React.FC = () => {
       </div>
 
       {/* Custom Dots */}
-      <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+      {/* <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -96,7 +96,7 @@ const SliderAnimation: React.FC = () => {
             onClick={() => goToSlide(index)}
           ></button>
         ))}
-      </div>
+      </div> */}
 
       {/* Custom Slider Controls (Prev/Next) */}
       <button

@@ -1,8 +1,10 @@
-import { ChevronLeft } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, PlayCircle } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const Videos = () => {
   const navigate = useNavigate();
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const videos = [
     {
@@ -11,7 +13,7 @@ const Videos = () => {
       description: "Learn the fundamental hand gestures of Bharatnatyam.",
     },
     {
-      id: "VIDEO_ID_2",
+      id: "UmRjxek5qYQ",
       title: "Footwork Techniques",
       description:
         "Master the rhythmic foot movements essential for performances.",
@@ -56,25 +58,41 @@ const Videos = () => {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {videos.map((video, index) => (
+          {videos.map((video) => (
             <div
-              key={index}
+              key={video.id}
               className="bg-white rounded-lg shadow-md overflow-hidden"
             >
-              {/* YouTube Video Embed */}
-              <div className="bg-orange-200 h-48 flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${video.id}`}
-                  title={video.title}
-                  frameBorder="0"
-                  allowFullScreen
-                  className="rounded-t-lg"
-                ></iframe>
+              <div
+                className="relative bg-orange-200 h-48 flex items-center justify-center cursor-pointer"
+                onClick={() => setActiveVideo(video.id)}
+              >
+                {activeVideo === video.id ? (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${video.id}?autoplay=1`}
+                    title={video.title}
+                    frameBorder="0"
+                    allow="autoplay"
+                    allowFullScreen
+                    className="rounded-t-lg"
+                  ></iframe>
+                ) : (
+                  <>
+                    <img
+                      src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                      alt={video.title}
+                      className="w-full h-full object-cover rounded-t-lg"
+                    />
+                    {/* Play Button Overlay */}
+                    {/* <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-t-lg">
+                      <PlayCircle size={60} className="text-white opacity-80 hover:opacity-100 transition duration-300" />
+                    </div> */}
+                  </>
+                )}
               </div>
 
-              {/* Video Details */}
               <div className="p-4">
                 <h3 className="font-semibold text-lg mb-2 text-orange-900">
                   {video.title}

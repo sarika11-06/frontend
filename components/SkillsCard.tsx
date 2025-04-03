@@ -15,6 +15,7 @@ const SkillsCard = () => {
   const navigate = useNavigate();
   const [activeLevel, setActiveLevel] = useState<Level>("basics");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const levels: Levels = {
     basics: {
@@ -192,16 +193,33 @@ const SkillsCard = () => {
                   className="bg-white rounded-lg shadow-md overflow-hidden"
                 >
                   {/* YouTube Video Embed */}
-                  <div className="bg-orange-200 h-48 flex items-center justify-center">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${lesson.id}`}
-                      title={lesson.title}
-                      frameBorder="0"
-                      allowFullScreen
-                      className="rounded-t-lg"
-                    ></iframe>
+                  <div className="bg-orange-200 h-48 flex items-center justify-center"
+                    onClick={() => setActiveVideo(lesson.id)}
+                  >
+                    {activeVideo === lesson.id ? (
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={`https://www.youtube.com/embed/${lesson.id}?autoplay=1`}
+                        title={lesson.title}
+                        frameBorder="0"
+                        allow="autoplay"
+                        allowFullScreen
+                        className="rounded-t-lg"
+                      ></iframe>
+                    ) : (
+                      <>
+                        <img
+                          src={`https://img.youtube.com/vi/${lesson.id}/hqdefault.jpg`}
+                          alt={lesson.title}
+                          className="w-full h-full object-cover rounded-t-lg"
+                        />
+                        {/* Play Button Overlay */}
+                        {/* <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-t-lg">
+                      <PlayCircle size={60} className="text-white opacity-80 hover:opacity-100 transition duration-300" />
+                    </div> */}
+                      </>
+                    )}
                   </div>
 
                   {/* Video Details */}
